@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body style="background-color: #cccccc;">
+    <div id="formBody" style="display: flex;justify-content: center;align-items: center;height: 90vh;">
+
+    <form method="POST" id="inputForm">
+        <label for="message">ID Заказа</label>
+        <input id="message" name="message" value="1" type="text">
+        <button type="submit" style="width:100px;">Найти заказ</button>
+    </form>
+
+    <div id="serverMessageBox" style="text-align: center;"></div>
+
+
+            <script>console.log("JS Loaded")
+
+            const url = "127.0.0.1:8080"
+
+            var inputForm = document.getElementById("inputForm")
+
+            inputForm.addEventListener("submit", (e)=>{
+
+                e.preventDefault()
+
+                const formdata = new FormData(inputForm)
+                fetch(url,{
+
+                    method:"POST",
+                    body:formdata,
+                }).then(
+                    response => response.text()
+                ).then(
+                    (data) => {console.log(data);document.getElementById("serverMessageBox").innerHTML=data}
+                ).catch(
+                    error => console.error(error)
+                )
+
+            })</script>
+        </div>
+    </body>
+</html>
